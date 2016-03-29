@@ -2,7 +2,7 @@ import path from 'path'
 import nodeExternals from 'webpack-node-externals'
 
 const PATHS = {
-  server: path.join(__dirname, 'api', 'server.js'),
+  server: path.join(__dirname, 'app', 'server.js'),
   dist: path.join(__dirname, 'dist'),
   nodeModules: path.join(__dirname, 'node_modules')
 }
