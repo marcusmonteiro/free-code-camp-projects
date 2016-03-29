@@ -20,6 +20,7 @@ test('myFunctions test', (assert) => {
     assert.equal(isNaturalLanguageDate('December'), false)
     assert.equal(isNaturalLanguageDate('December 15, Foo'), false)
     assert.equal(isNaturalLanguageDate('December, 2015'), true)
+    assert.equal(isNaturalLanguageDate('2015'), true)
     assert.end()
   })
   assert.end()
