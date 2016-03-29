@@ -3,10 +3,7 @@ function isUnixTimestamp(timestamp) {
 }
 
 function isNaturalLanguageDate(date) {
-  if (chrono.parseDate(date)) {
-    return true
-  }
-  return false
+  throw new Error('Not implemented')
 }
 
 export { isUnixTimestamp, isNaturalLanguageDate }
