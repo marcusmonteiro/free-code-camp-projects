@@ -19,7 +19,7 @@ const serverConfig = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        presets: ['es2015', 'stage-0'],
+        presets: ['es2015', 'stage-0', 'react'],
         exclude: __PATHS__.node_modules
       },
       {

@@ -2,18 +2,40 @@ import express from 'express'
 import { __PORT__, __PRODUCTION__ } from '../config'
 import { unixTimestampToNaturalLanguageDate } from './core'
 import PrettyError from 'pretty-error'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import Home from './components/pages/Home'
 
 const server = express()
 
 server.get('/api/:unixTimestampOrNaturalLanguageDate', (req, res) => {
   const d = req.params.unixTimestampOrNaturalLanguageDate
   const r = unixTimestampToNaturalLanguageDate(d)
-  res.json(r)
+  res.json({
+    natural: r
+  })
 })
 
-server.get('/', (req, res) => {
-  res.send('Hello, World!')
-})
+server.use('*', handleRender)
+
+function handleRender (req, res) {
+  const html = renderToString(<Home />)
+  res.send(renderFullPage(html))
+}
+
+function renderFullPage (html) {
+  return `
+    <!doctype html>
+    <html>
+    <head>
+      <title>Timestamp Microservice project from FreeCodeCamp</title>
+    </head>
+    <body>
+      <div>${html}</div>
+    </body>
+    </html>
+  `
+}
 
 // Error handling
 const pe = new PrettyError()
