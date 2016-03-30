@@ -12,8 +12,8 @@ class Home extends React.Component {
           <li>If it does not contain a date or Unix timestamp, it returns null for those properties.</li>
         </ol>
         <h2>Example usage:</h2>
-        <p>https://timestamp-ms.herokuapp.com/api/December 15, 2015</p>
-        <p>https://timestamp-ms.herokuapp.com/api/1450137600</p>
+        <p>https://enigmatic-retreat-16073.herokuapp.com/api/December 15, 2015</p>
+        <p>https://enigmatic-retreat-16073.herokuapp.com/api/1450137600</p>
         <h2>Example output:</h2>
         <p>{'{ "unix": 1450137600, "natural": "December 15, 2015" }'}</p>
       </div>
