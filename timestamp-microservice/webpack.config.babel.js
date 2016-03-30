@@ -1,11 +1,5 @@
-import path from 'path'
 import nodeExternals from 'webpack-node-externals'
-
-const PATHS = {
-  server: path.join(__dirname, 'app', 'server.js'),
-  dist: path.join(__dirname, 'dist'),
-  nodeModules: path.join(__dirname, 'node_modules')
-}
+import { PATHS } from './config'
 
 const serverConfig = {
   target: 'node',

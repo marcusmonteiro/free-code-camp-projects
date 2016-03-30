@@ -1,5 +1,5 @@
 import express from 'express'
-import { port } from '../config'
+import { PORT } from '../config'
 
 const server = express()
 
@@ -7,6 +7,6 @@ server.get('/', (req, res) => {
   res.send('Hello, World!')
 })
 
-server.listen(port, () => {
-  console.log(`Server listening on port ${port}`)
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`)
 })

@@ -5,7 +5,8 @@
   "main": "./app/server.js",
   "scripts": {
     "start": "node ./dist/server.js",
-    "dist": "webpack",
+    "clean": "babel-node clean.js",
+    "dist": "npm run clean && webpack",
     "test": "npm run lint && npm run test:unit",
     "lint": "standard | snazzy",
     "test:unit": "babel-tape-runner ./app/**/*-test.js | faucet"
@@ -22,6 +23,7 @@
     "moment": "^2.12.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.6.5",
     "babel-core": "^6.7.4",
     "babel-eslint": "^6.0.0",
     "babel-loader": "^6.2.4",
@@ -32,6 +34,7 @@
     "eslint": "^2.5.3",
     "faucet": "0.0.1",
     "json-loader": "^0.5.4",
+    "rmdir": "^1.2.0",
     "snazzy": "^3.0.0",
     "standard": "^6.0.8",
     "tape": "^4.5.1",
