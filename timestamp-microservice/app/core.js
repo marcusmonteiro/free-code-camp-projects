@@ -7,7 +7,7 @@ function isUnixTimestamp (timestamp) {
 
 function unixTimestampToNaturalLanguageDate (timestamp, utcOffset = 0) {
   if (!isUnixTimestamp(timestamp)) {
-    throw new Error('Invalid unix timestamp')
+    throw new Error(`Invalid unix timestamp: ${timestamp}`)
   }
   return moment.unix(timestamp).utcOffset(utcOffset).format('MMMM D, YYYY')
 }

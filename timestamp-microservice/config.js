@@ -8,4 +8,6 @@ const PATHS = {
   nodeModules: path.join(__dirname, 'node_modules')
 }
 
-export { PORT, PATHS }
+const PRODUCTION = process.env.NODE_ENV === 'production'
+
+export { PORT, PATHS, PRODUCTION }
