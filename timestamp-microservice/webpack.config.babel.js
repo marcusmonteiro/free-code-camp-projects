@@ -1,5 +1,5 @@
 import nodeExternals from 'webpack-node-externals'
-import { PATHS } from './config'
+import { __PATHS__ } from './config'
 
 const serverConfig = {
   target: 'node',
@@ -7,10 +7,10 @@ const serverConfig = {
     nodeExternals()
   ],
 
-  entry: PATHS.server,
+  entry: __PATHS__.server,
 
   output: {
-    path: PATHS.dist,
+    path: __PATHS__.dist,
     filename: 'server.js'
   },
 
@@ -20,7 +20,7 @@ const serverConfig = {
         test: /\.js$/,
         loader: 'babel-loader',
         presets: ['es2015', 'stage-0'],
-        exclude: PATHS.node_modules
+        exclude: __PATHS__.node_modules
       },
       {
         test: /\.json$/,

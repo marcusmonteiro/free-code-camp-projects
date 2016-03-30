@@ -1,10 +1,10 @@
 import rmdir from 'rmdir'
-import { PATHS } from './config'
+import { __PATHS__ } from './config'
 
-rmdir(PATHS.dist, (err, dirs, files) => {
+rmdir(__PATHS__.dist, (err, dirs, files) => {
   if (err && err.code !== 'ENOENT') {
     throw err
   }
-  console.log(PATHS.dist + ' directory removed')
+  console.log(__PATHS__.dist + ' directory removed')
 })
 

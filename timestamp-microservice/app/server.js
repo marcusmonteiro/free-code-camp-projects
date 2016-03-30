@@ -1,5 +1,5 @@
 import express from 'express'
-import { PORT, PRODUCTION } from '../config'
+import { __PORT__, __PRODUCTION__ } from '../config'
 import { unixTimestampToNaturalLanguageDate } from './core'
 import PrettyError from 'pretty-error'
 
@@ -24,9 +24,9 @@ server.use((err, req, res, next) => {
   console.error(pe.render(err))
   const statusCode = err.status || 500
   res.status(statusCode)
-  PRODUCTION ? res.send('') : res.send(err.stack)
+  __PRODUCTION__ ? res.send('') : res.send(err.stack)
 })
 
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`)
+server.listen(__PORT__, () => {
+  console.log(`Server listening on port ${__PORT__}`)
 })
