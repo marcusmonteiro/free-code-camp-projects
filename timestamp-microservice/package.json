@@ -5,6 +5,7 @@
   "main": "./app/server.js",
   "scripts": {
     "start": "node ./dist/server.js",
+    "start:production": "NODE_ENV=production node ./dist/server.js",
     "clean": "babel-node clean.js",
     "dist": "npm run clean && webpack",
     "test": "npm run lint && npm run test:unit",

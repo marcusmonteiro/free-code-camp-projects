@@ -1,6 +1,6 @@
 import express from 'express'
 import { __PORT__, __PRODUCTION__ } from '../config'
-import { unixTimestampToNaturalLanguageDate } from './core'
+import { unixTimestampToNaturalLanguageDateApi } from './api'
 import PrettyError from 'pretty-error'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -10,7 +10,7 @@ const server = express()
 
 server.get('/api/:unixTimestampOrNaturalLanguageDate', (req, res) => {
   const d = req.params.unixTimestampOrNaturalLanguageDate
-  const r = unixTimestampToNaturalLanguageDate(d)
+  const r = unixTimestampToNaturalLanguageDateApi(d)
   res.json({
     natural: r
   })
