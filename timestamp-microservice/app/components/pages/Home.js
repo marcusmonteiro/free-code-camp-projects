@@ -5,6 +5,7 @@ class Home extends React.Component {
     return (
       <div>
         <h1>Timestamp Microservice project from FreeCodeCamp</h1>
+        <h2>Camper: <a href='https://www.freecodecamp.com/marcusmonteiro'>Marcus Vinicius Monteiro</a></h2>
         <h2>User stories:</h2>
         <ol>
           <li>I can pass a string as a parameter, and it will check to see whether that string contains either a unix timestamp or a natural language date (example: January 1, 2016)</li>
