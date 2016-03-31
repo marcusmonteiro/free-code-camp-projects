@@ -4,6 +4,9 @@ import {
   unixTimestampToNaturalLanguageDate,
   isNaturalLanguageDate
 } from '../core'
+import {
+  isNumeric
+} from '../utils'
 
 test('core test', (assert) => {
   test('isUnixTimestamp test', (assert) => {
@@ -94,12 +97,20 @@ test('core test', (assert) => {
 
   test('isNaturalLanguageDate test', (assert) => {
     const t = isNaturalLanguageDate
-    assert.equal(t('December 15, 2015'), true)
-    assert.equal(t('December 15'), true)
-    assert.equal(t('December'), false)
-    assert.equal(t('December 15, Foo'), false)
-    assert.equal(t('December, 2015'), true)
-    assert.equal(t('2015'), true)
+    assert.ok(t('December 15, 2015'), 'Normal case')
+    assert.notOk(t('Foovember 15, 2015'), 'Invalid month')
+    assert.notOk(t('Foovember 15, 2015'), 'Invalid month')
+    assert.notOk(t('15, 2015'), 'Must have month')
+    assert.ok(t('December 1, 2015'), 'Day with one digit')
+    assert.notOk(t('December 32, 2015'), 'Day cannot be larger than 31')
+    assert.notOk(t('December -1, 2015'), 'Day cannot be negative')
+    assert.notOk(t('December Foo, 2015'), 'Day must be a number')
+    assert.ok(t('December, 2015'), 'There must be a default day (1?)')
+    assert.ok(t('December 15'), 'There must be a default year (2001? 1970?)')
+    assert.ok(t('December 15, 99999'), 'Year can be any positive number')
+    assert.notOk(t('December 15, -1'), 'Year cannot be a negative number')
+    assert.notOk(t('December 15, Foo'), 'Year must be a number')
+    assert.ok(t('2015'), 'There must be a default date (01/01/1970 maybe?)')
     assert.end()
   })
   assert.end()
