@@ -2,6 +2,7 @@
   "name": "timestamp-microservice",
   "version": "1.0.0",
   "description": "Timestamp microservice project from FreeCodeCamp",
+  "repository": "https://github.com/marcusmonteiro/free-code-camp-projects.git",
   "main": "./app/server.js",
   "scripts": {
     "start": "npm run dist && NODE_ENV=production node ./dist/server.js",
@@ -20,11 +21,6 @@
   "author": "Marcus Vinicius Monteiro de Souza",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4",
-    "moment": "^2.12.0",
-    "pretty-error": "^2.0.0",
-    "react": "^0.14.8",
-    "react-dom": "^0.14.8",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.7.4",
     "babel-eslint": "^6.0.0",
@@ -33,7 +29,12 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.7.2",
+    "express": "^4.13.4",
     "json-loader": "^0.5.4",
+    "moment": "^2.12.0",
+    "pretty-error": "^2.0.0",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
     "rmdir": "^1.2.0",
     "webpack": "^1.12.14",
     "webpack-node-externals": "^1.0.0"

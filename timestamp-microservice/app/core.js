@@ -13,7 +13,7 @@ function unixTimestampToNaturalLanguageDate (timestamp, utcOffset = 0) {
 }
 
 function isNaturalLanguageDate (date) {
-  throw new Error('Not implemented')
+  return moment(date).isValid()
 }
 
 export {
