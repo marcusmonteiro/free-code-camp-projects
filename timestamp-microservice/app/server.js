@@ -24,9 +24,15 @@ function handleRender (req, res) {
 function renderFullPage (html) {
   return `
     <!doctype html>
-    <html>
+    <html lang="en">
     <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="Timestamp Microservice project from FreeCodeCamp">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Timestamp Microservice project from FreeCodeCamp</title>
+      <meta name="msapplication-tap-highlight" content="no">
+      <meta name="theme-color" content="#2F3BA2">
     </head>
     <body>
       <div>${html}</div>
