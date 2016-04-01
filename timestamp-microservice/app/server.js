@@ -33,6 +33,11 @@ function renderFullPage (html) {
       <title>Timestamp Microservice project from FreeCodeCamp</title>
       <meta name="msapplication-tap-highlight" content="no">
       <meta name="theme-color" content="#2F3BA2">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
+      <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+      <style>body { font-family: 'Roboto', sans-serif; }</style>
     </head>
     <body>
       <div>${html}</div>
