@@ -34,6 +34,8 @@ test('api test', (assert) => {
     assert.deepEqual(t('Foo 1, 1970'), { unix: null, natural: null })
     assert.deepEqual(t('1, 1970'), { unix: null, natural: null })
     assert.deepEqual(t('January'), { unix: null, natural: null })
+
+    assert.deepEqual(t('1450137600'), { unix: 1450137600, natural: 'December 15, 2015' })
     assert.end()
   })
   assert.end()

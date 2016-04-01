@@ -24,7 +24,7 @@ function timestampMicroservice (timestampOrNaturalLanguageDate, utcOffset = 0) {
   let r = unixTimestampToNaturalLanguageDateApi(timestampOrNaturalLanguageDate, utcOffset)
   if (r) {
     return {
-      unix: timestampOrNaturalLanguageDate,
+      unix: parseFloat(timestampOrNaturalLanguageDate),
       natural: r
     }
   }

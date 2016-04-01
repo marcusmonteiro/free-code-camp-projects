@@ -1,4 +1,3 @@
-import { isFinite } from 'lodash'
 import moment from 'moment'
 
 function isUnixTimestamp (timestamp) {
@@ -6,6 +5,7 @@ function isUnixTimestamp (timestamp) {
 }
 
 function unixTimestampToNaturalLanguageDate (timestamp, utcOffset = 0) {
+  console.log(moment.unix(timestamp))
   if (!isUnixTimestamp(timestamp)) {
     throw new Error(`Invalid unix timestamp: ${timestamp}`)
   }
@@ -20,7 +20,7 @@ function naturalLanguageDateToUnixTimestamp (date, utcOffset = 0) {
   if (!isNaturalLanguageDate(date)) {
     throw new Error(`Invalid natural language date: ${date}`)
   }
-  return parseInt(moment(date).utcOffset(utcOffset).format('X'))
+  return parseFloat(moment(date).utcOffset(utcOffset).format('X'))
 }
 
 export {
