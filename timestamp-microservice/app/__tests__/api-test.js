@@ -8,17 +8,32 @@ test('api test', (assert) => {
     const t = timestampMicroservice
     const SECONDS_IN_HOUR = 3600
     const SECONDS_IN_DAY = SECONDS_IN_HOUR * 24
-    assert.ok(t('January 1, 1970').unix >= 0 && t('January 1, 1970').unix < SECONDS_IN_DAY, 'Result must be somewhere inside January 1, 1970')
-    assert.ok(t('January 1, 1969').unix < 0 && t('January 1, 1970').unix > -SECONDS_IN_DAY, 'Returns negative unix timestamps correctly')
-    assert.equal(t('January 1, 1970').natural, 'January 1, 1970', 'Returns same natural language date')
     assert.deepEqual(t(0), { unix: 0, natural: 'January 1, 1970' })
     assert.deepEqual(t(SECONDS_IN_DAY), { unix: SECONDS_IN_DAY, natural: 'January 2, 1970' })
     assert.deepEqual(t(-SECONDS_IN_DAY), { unix: -SECONDS_IN_DAY, natural: 'December 31, 1969' })
     assert.deepEqual(t(SECONDS_IN_HOUR * 21, 3), { unix: SECONDS_IN_HOUR * 21, natural: 'January 2, 1970' })
-    assert.deepEqual(t('Foo'), { unix: null, natural: null }, 'Invalid unix timestamp')
-    assert.deepEqual(t({}), { unix: null, natural: null }, 'Invalid unix timestamp')
-    assert.deepEqual(t([]), { unix: null, natural: null }, 'Invalid unix timestamp')
-    assert.deepEqual(t(undefined), { unix: null, natural: null }, 'Invalid unix timestamp')
+
+    let d = t('January 1, 1970')
+    assert.equal(d.unix >= 0 && d.unix < SECONDS_IN_DAY, true, 'Unix timestamp somewhere inside January 1, 1970')
+    assert.equal(d.natural, 'January 1, 1970')
+
+    d = t('January 2, 1970')
+    assert.equal(d.unix >= SECONDS_IN_DAY && d.unix < SECONDS_IN_DAY * 2, true, 'Unix timestamp somewhere inside January 2, 1970')
+    assert.equal(d.natural, 'January 2, 1970')
+
+    d = t('December 31, 1969')
+    assert.equal(d.unix < 0 && d.unix > -SECONDS_IN_DAY, true, 'Unix timestamp somewhere inside December 31, 1969')
+    assert.equal(d.natural, 'December 31, 1969')
+
+    d = t('January, 1970')
+    assert.equal(d.unix >= 0 && d.unix < SECONDS_IN_DAY, true, 'Unix timestamp somewhere inside January 1, 1970')
+    assert.equal(d.natural, 'January 1, 1970')
+
+    assert.deepEqual(t('Foo'), { unix: null, natural: null })
+    assert.deepEqual(t('Foo1970'), { unix: null, natural: null })
+    assert.deepEqual(t('Foo 1, 1970'), { unix: null, natural: null })
+    assert.deepEqual(t('1, 1970'), { unix: null, natural: null })
+    assert.deepEqual(t('January'), { unix: null, natural: null })
     assert.end()
   })
   assert.end()

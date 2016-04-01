@@ -1,3 +1,4 @@
+import moment from 'moment'
 import {
   unixTimestampToNaturalLanguageDate,
   naturalLanguageDateToUnixTimestamp
@@ -31,7 +32,7 @@ function timestampMicroservice (timestampOrNaturalLanguageDate, utcOffset = 0) {
   if (r) {
     return {
       unix: r,
-      natural: timestampOrNaturalLanguageDate
+      natural: moment(timestampOrNaturalLanguageDate).format('MMMM D, YYYY')
     }
   }
   return {
