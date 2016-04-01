@@ -2,8 +2,12 @@ import test from 'tape'
 import {
   isUnixTimestamp,
   unixTimestampToNaturalLanguageDate,
-  isNaturalLanguageDate
+  isNaturalLanguageDate,
+  naturalLanguageDateToUnixTimestamp
 } from '../core'
+
+const SECONDS_IN_HOUR = 3600
+const SECONDS_IN_DAY = SECONDS_IN_HOUR * 24
 
 test('core test', (assert) => {
   test('isUnixTimestamp test', (assert) => {
@@ -75,12 +79,10 @@ test('core test', (assert) => {
 
   test('unixTimestampToNaturalLanguageDate test', (assert) => {
     const t = unixTimestampToNaturalLanguageDate
-    const secondsInHour = 3600
-    const secondsInDay = secondsInHour * 24
     assert.equal(t(0), 'January 1, 1970')
-    assert.equal(t(secondsInDay), 'January 2, 1970')
-    assert.equal(t(-secondsInDay), 'December 31, 1969')
-    assert.equal(t(secondsInHour * 21, 3), 'January 2, 1970')
+    assert.equal(t(SECONDS_IN_DAY), 'January 2, 1970')
+    assert.equal(t(-SECONDS_IN_DAY), 'December 31, 1969')
+    assert.equal(t(SECONDS_IN_HOUR * 21, 3), 'January 2, 1970')
     assert.throws(() => { t('Foo') }, null, 'Invalid unix timestamp')
     assert.throws(() => { t({}) }, null, 'Invalid unix timestamp')
     assert.throws(() => { t([]) }, null, 'Invalid unix timestamp')
@@ -95,19 +97,37 @@ test('core test', (assert) => {
   test('isNaturalLanguageDate test', (assert) => {
     const t = isNaturalLanguageDate
     assert.ok(t('December 15, 2015'), 'Normal case')
-    assert.notOk(t('Foovember 15, 2015'), 'Invalid month')
+    assert.ok(t('December 1, 2015'), 'Day with one digit')
+    assert.ok(t('December -1, 2015'), 'Negative days will be considered positive. Is it dangerous?')
+    assert.ok(t('December, 2015'), 'There must be a default day')
+    assert.ok(t('December Foo, 2015'), 'There must be a default day(2)')
+    assert.ok(t('December 15'), 'There must be a default year')
+    assert.ok(t('December 15, 99999'), 'Year can be any positive number')
+    assert.ok(t('2015'), 'There must be a default date')
     assert.notOk(t('Foovember 15, 2015'), 'Invalid month')
     assert.notOk(t('15, 2015'), 'Must have month')
-    assert.ok(t('December 1, 2015'), 'Day with one digit')
     assert.notOk(t('December 32, 2015'), 'Day cannot be larger than 31')
-    assert.ok(t('December -1, 2015'), 'Negative days will be considered positive. Is it dangerous?')
-    assert.ok(t('December, 2015'), 'There must be a default day (1?)')
-    assert.ok(t('December Foo, 2015'), 'There must be a default day 2 (1?)')
-    assert.ok(t('December 15'), 'There must be a default year (2001? 1970?)')
-    assert.ok(t('December 15, 99999'), 'Year can be any positive number')
     assert.notOk(t('December 15, -1'), 'Year cannot be a negative number')
     assert.notOk(t('December 15, Foo'), 'Year must be a number')
-    assert.ok(t('2015'), 'There must be a default date (01/01/1970 maybe?)')
+    assert.end()
+  })
+
+  test('naturalLanguageDateToUnixTimestamp test', (assert) => {
+    const t = naturalLanguageDateToUnixTimestamp
+    const DEFAULT_UNIX_TIMESTAMP = 0
+    assert.ok(isUnixTimestamp(t('January 1, 1970')), 'Must return unix timestamp')
+    assert.ok(t('January 1, 1970') >= 0 && t('January 1, 1970') <= SECONDS_IN_DAY, 'Result must be somewhere inside January 1, 1970')
+    assert.ok(t('January 2, 1970') >= SECONDS_IN_DAY && t('January 2, 1970') <= (2 * SECONDS_IN_DAY), 'Result must be somewhere inside January 2, 1970')
+    assert.ok(t('December 31, 1969') < 0 && t('December 31, 1969') >= -SECONDS_IN_DAY, 'Returns negative unix timestamps correctly')
+    assert.ok(t('January 2, 1970', 3) >= 0 && t('January 2, 1970', 3) >= SECONDS_IN_HOUR * 21, 'Utc offset working correctly')
+    assert.equal(t('0'), DEFAULT_UNIX_TIMESTAMP, 'Send only a number, return a default unix timestamp')
+    assert.equal(t('2015'), DEFAULT_UNIX_TIMESTAMP, 'Send only a number, return a default unix timestamp(2)')
+    assert.equal(t('-2015'), DEFAULT_UNIX_TIMESTAMP, 'Send only a number, return a default unix timestamp(3)')
+    assert.throws(() => { t('Foovember 15, 2015') }, null, 'Invalid month')
+    assert.throws(() => { t('15, 2015') }, null, 'Must have month')
+    assert.throws(() => { t('December 32, 2015') }, null, 'Day cannot be larger than 31')
+    assert.throws(() => { t('December 15, -1') }, null, 'Year cannot be a negative number')
+    assert.throws(() => { t('December 15, Foo') }, null, 'Year must be a number')
     assert.end()
   })
   assert.end()

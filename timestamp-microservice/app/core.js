@@ -16,8 +16,20 @@ function isNaturalLanguageDate (date) {
   return moment(date).isValid()
 }
 
+function naturalLanguageDateToUnixTimestamp (date, utcOffset = 0) {
+  const DEFAULT_UNIX_TIMESTAMP = 0
+  if (!isNaturalLanguageDate(date)) {
+    throw new Error(`Invalid natural language date: ${date}`)
+  }
+  if (isUnixTimestamp(date)) {
+    return DEFAULT_UNIX_TIMESTAMP
+  }
+  return parseInt(moment(date).utcOffset(utcOffset).format('X'))
+}
+
 export {
   isUnixTimestamp,
   unixTimestampToNaturalLanguageDate,
-  isNaturalLanguageDate
+  isNaturalLanguageDate,
+  naturalLanguageDateToUnixTimestamp
 }

@@ -1,8 +1,19 @@
-import { unixTimestampToNaturalLanguageDate } from './core'
+import {
+  unixTimestampToNaturalLanguageDate,
+  naturalLanguageDateToUnixTimestamp
+} from './core'
 
 function unixTimestampToNaturalLanguageDateApi (timestamp, utcOffset = 0) {
   try {
     return unixTimestampToNaturalLanguageDate(timestamp, utcOffset)
+  } catch (err) {
+    return null
+  }
+}
+
+function naturalLanguageDateToUnixTimestampApi (date, utcOffset = 0) {
+  try {
+    return naturalLanguageDateToUnixTimestamp(date, utcOffset)
   } catch (err) {
     return null
   }
@@ -16,6 +27,13 @@ function timestampMicroservice (timestampOrNaturalLanguageDate, utcOffset = 0) {
       natural: r
     }
   }
+  r = naturalLanguageDateToUnixTimestampApi(timestampOrNaturalLanguageDate, utcOffset)
+  if (r) {
+    return {
+      unix: r,
+      natural: timestampOrNaturalLanguageDate
+    }
+  }
   return {
     unix: null,
     natural: null
@@ -23,6 +41,5 @@ function timestampMicroservice (timestampOrNaturalLanguageDate, utcOffset = 0) {
 }
 
 export {
-  unixTimestampToNaturalLanguageDateApi,
   timestampMicroservice
 }
