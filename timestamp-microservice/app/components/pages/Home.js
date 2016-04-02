@@ -7,6 +7,8 @@ const MyPageHeader = (
   <PageHeader><i className='fa fa-clock-o'></i> Timestamp Microservice project from <a href='https://www.freecodecamp.com/challenges/timestamp-microservice'>FreeCodeCamp</a>
     <br />
     <small>Camper: <a href='https://www.freecodecamp.com/marcusmonteiro'>Marcus Vinicius Monteiro</a></small>
+    <br />
+    <small>Code at: <a href='https://github.com/marcusmonteiro/free-code-camp-projects/tree/master/timestamp-microservice'>Github</a></small>
   </PageHeader>
 )
 
