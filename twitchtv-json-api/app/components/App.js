@@ -20,11 +20,15 @@ const MyPageHeader = (
 )
 
 function StreamListGroupItem ({user, description, link}) {
+  let c = <Col xs={6} md={6}>{user}</Col>
+  if (link) {
+    c = <Col xs={6} md={6}><a href={link} target='_blank'>{user}</a></Col>
+  }
   return (
     <ListGroupItem>
       <Grid>
         <Row>
-          <Col xs={6} md={6}><a href={link}>{user}</a></Col>
+          {c}
           <Col xs={6} md={6}>{description}</Col>
         </Row>
       </Grid>
