@@ -5,7 +5,8 @@
   "repository": "https://github.com/marcusmonteiro/free-code-camp-projects.git",
   "main": "./app/app.js",
   "scripts": {
-    "start": "npm run dist && webpack-dev-server",
+    "start": "npm run dist && cd dist && http-server",
+    "start:dev": "npm run dist && webpack-dev-server",
     "clean": "babel-node clean.js",
     "dist": "npm run clean && webpack",
     "test": "npm run lint && npm run test:unit",
@@ -29,6 +30,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.7.2",
+    "http-server": "^0.9.0",
     "jquery": "^2.2.2",
     "react": "^0.14.8",
     "react-bootstrap": "^0.28.5",
