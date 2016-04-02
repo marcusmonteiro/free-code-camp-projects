@@ -1,7 +1,7 @@
 {
-  "name": "twitchtv-json-api",
+  "name": "visualize-data-bar-chart",
   "version": "1.0.0",
-  "description": "Twitchtv JSON API project from FreeCodeCamp",
+  "description": "Visualize Data with a Bar Chart project from FreeCodeCamp",
   "repository": "https://github.com/marcusmonteiro/free-code-camp-projects.git",
   "main": "./app/app.js",
   "scripts": {
@@ -15,9 +15,9 @@
   },
   "keywords": [
     "FreeCodeCamp",
-    "Twitchtv",
-    "JSON",
-    "API"
+    "Data",
+    "Visualization",
+    "D3"
   ],
   "author": "Marcus Vinicius Monteiro de Souza",
   "license": "ISC",
