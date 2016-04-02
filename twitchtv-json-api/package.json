@@ -5,7 +5,7 @@
   "repository": "https://github.com/marcusmonteiro/free-code-camp-projects.git",
   "main": "./app/app.js",
   "scripts": {
-    "start": "npm run dist && cd dist && http-server",
+    "start": "npm run dist && http-server ./dist",
     "start:dev": "npm run dist && webpack-dev-server",
     "clean": "babel-node clean.js",
     "dist": "npm run clean && webpack",
