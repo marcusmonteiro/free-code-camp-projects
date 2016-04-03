@@ -1,13 +1,11 @@
 import webpack from 'webpack'
-import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import CopyWebpackPlugin from 'copy-webpack-plugin'
 import { __PATHS__ } from './config'
 
 const browserConfig = {
 
   entry: {
-    vendor: ['d3', 'react'],
+    vendor: ['d3', 'c3', 'react'],
     app: __PATHS__.app
   },
 
@@ -23,10 +21,6 @@ const browserConfig = {
         loader: 'babel-loader',
         presets: ['es2015', 'stage-0', 'react'],
         exclude: __PATHS__.node_modules
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       }
     ]
   },
@@ -41,10 +35,7 @@ const browserConfig = {
       mobile: true,
 
       title: 'Visualize Data with a Bar Chart project from FreeCodeCamp'
-    }),
-    new CopyWebpackPlugin([
-      { from: __PATHS__.data }
-    ])
+    })
   ],
 
   devServer: {

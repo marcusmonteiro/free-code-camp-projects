@@ -1,10 +1,20 @@
 import React from 'react'
 import d3 from 'd3'
 import c3 from 'c3'
+import { PageHeader } from 'react-bootstrap'
+
+const MyPageHeader = (
+  <PageHeader><i className='fa fa-bar-chart'></i> Visualize Data with a Bar Chart project from <a href='https://www.freecodecamp.com/challenges/visualize-data-with-a-bar-chart'>FreeCodeCamp</a>
+    <br />
+    <small>Camper: <a href='https://www.freecodecamp.com/marcusmonteiro'>Marcus Vinicius Monteiro</a></small>
+    <br />
+    <small>Code at: <a href='https://github.com/marcusmonteiro/free-code-camp-projects/tree/master/visualize-data-bar-chart'>Github</a></small>
+  </PageHeader>
+)
 
 class App extends React.Component {
   componentDidMount () {
-    d3.json('./GDP-data.json', (error, json) => {
+    d3.json('http://2am.ninja/json/gdp.json', (error, json) => {
       if (error) {
         console.error(error)
       }
@@ -14,7 +24,6 @@ class App extends React.Component {
       const quarters = dataset.map((year) => {
         return year[0]
       })
-      console.log(quarters)
 
       const GDPs = dataset.map((year) => {
         return year[1]
@@ -53,7 +62,12 @@ class App extends React.Component {
 
   render () {
     return (
-      <div id='chart' />
+      <div>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css' />
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' />
+        {MyPageHeader}
+        <div id='chart' />
+      </div>
     )
   }
 }
