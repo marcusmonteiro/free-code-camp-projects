@@ -11,7 +11,7 @@ const USERS = [
 ]
 
 const MyPageHeader = (
-  <PageHeader><i className='fa fa-television'></i><a href='https://www.twitch.tv'> Twitch.tv</a> JSON API project from <a href='https://www.freecodecamp.com/challenges/use-the-twitchtv-json-api'>FreeCodeCamp</a>
+  <PageHeader><i className='fa fa-twitch'></i><a href='https://www.twitch.tv'> Twitch.tv</a> JSON API project from <a href='https://www.freecodecamp.com/challenges/use-the-twitchtv-json-api'>FreeCodeCamp</a>
     <br />
     <small>Camper: <a href='https://www.freecodecamp.com/marcusmonteiro'>Marcus Vinicius Monteiro</a></small>
     <br />

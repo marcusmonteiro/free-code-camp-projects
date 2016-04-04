@@ -16,7 +16,7 @@ class App extends React.Component {
   componentDidMount () {
     d3.json('http://2am.ninja/json/gdp.json', (error, json) => {
       if (error) {
-        console.error(error)
+        return console.error(error)
       }
 
       const dataset = json.data
