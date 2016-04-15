@@ -4,11 +4,11 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import ReactDOM from 'react-dom/server'
-import { match } from 'universal-router'
+import {match} from 'universal-router'
 import PrettyError from 'pretty-error'
 import routes from './routes'
 import assets from './assets'
-import { port, auth, analytics } from './config'
+import {port, analytics} from './config'
 
 const server = express()
 
@@ -24,7 +24,7 @@ global.navigator.userAgent = global.navigator.userAgent || 'all'
 // -----------------------------------------------------------------------------
 server.use(express.static(path.join(__dirname, 'public')))
 server.use(cookieParser())
-server.use(bodyParser.urlencoded({ extended: true }))
+server.use(bodyParser.urlencoded({extended: true}))
 server.use(bodyParser.json())
 
 //
@@ -35,7 +35,7 @@ server.get('*', async (req, res, next) => {
     let css = []
     let statusCode = 200
     const template = require('./views/index.jade')
-    const data = { title: '', description: '', css: '', body: '', entry: assets.main.js }
+    const data = {title: '', description: '', css: '', body: '', entry: assets.main.js}
 
     if (process.env.NODE_ENV === 'production') {
       data.trackingId = analytics.google.trackingId
@@ -45,11 +45,11 @@ server.get('*', async (req, res, next) => {
       path: req.path,
       query: req.query,
       context: {
-        insertCss: styles => css.push(styles._getCss()),
-        setTitle: value => (data.title = value),
-        setMeta: (key, value) => (data[key] = value),
+        insertCss: (styles) => css.push(styles._getCss()),
+        setTitle: (value) => (data.title = value),
+        setMeta: (key, value) => (data[key] = value)
       },
-      render(component, status = 200) {
+      render (component, status = 200) {
         css = []
         statusCode = status
         data.body = ReactDOM.renderToString(component)
@@ -87,6 +87,5 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 // Launch the server
 // -----------------------------------------------------------------------------
 server.listen(port, () => {
-    console.log(`The server is running at http://localhost:${port}/`)
-  }
-)
+  console.log(`The server is running at http://localhost:${port}/`)
+})

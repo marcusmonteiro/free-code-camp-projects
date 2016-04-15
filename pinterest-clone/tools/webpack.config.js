@@ -13,11 +13,11 @@ const AUTOPREFIXER_BROWSERS = [
   'Explorer >= 9',
   'iOS >= 7',
   'Opera >= 12',
-  'Safari >= 7.1',
+  'Safari >= 7.1'
 ]
 const GLOBALS = {
   'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
-  __DEV__: DEBUG,
+  __DEV__: DEBUG
 }
 
 //
@@ -31,7 +31,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, '../build/public/assets'),
     publicPath: '/assets/',
-    sourcePrefix: '  ',
+    sourcePrefix: '  '
   },
 
   module: {
@@ -41,7 +41,7 @@ const config = {
         loader: 'babel-loader',
         include: [
           path.resolve(__dirname, '../node_modules/react-routing/src'),
-          path.resolve(__dirname, '../src'),
+          path.resolve(__dirname, '../src')
         ],
         query: {
           // https://github.com/babel/babel-loader#options
@@ -52,17 +52,17 @@ const config = {
           presets: [
             'react',
             'es2015',
-            'stage-0',
+            'stage-0'
           ],
           plugins: [
             'transform-runtime',
             ...DEBUG ? [] : [
               'transform-react-remove-prop-types',
               'transform-react-constant-elements',
-              'transform-react-inline-elements',
-            ],
-          ],
-        },
+              'transform-react-inline-elements'
+            ]
+          ]
+        }
       },
       {
         test: /\.scss$/,
@@ -83,26 +83,26 @@ const config = {
       },
       {
         test: /\.json$/,
-        loader: 'json-loader',
+        loader: 'json-loader'
       },
       {
         test: /\.txt$/,
-        loader: 'raw-loader',
+        loader: 'raw-loader'
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
         loader: 'url-loader',
         query: {
           name: DEBUG ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-          limit: 10000,
-        },
+          limit: 10000
+        }
       },
       {
         test: /\.(eot|ttf|wav|mp3)$/,
         loader: 'file-loader',
         query: {
-          name: DEBUG ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-        },
+          name: DEBUG ? '[path][name].[ext]?[hash]' : '[hash].[ext]'
+        }
       },
       {
         test: /\.jade$/,
@@ -132,11 +132,11 @@ const config = {
     cachedAssets: VERBOSE
   },
 
-  postcss(bundler) {
+  postcss (bundler) {
     return [
-      require('postcss-import')({ addDependencyTo: bundler }),
+      require('postcss-import')({addDependencyTo: bundler}),
       require('precss')(),
-      require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS })
+      require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS})
     ]
   }
 }
@@ -159,14 +159,14 @@ const clientConfig = extend(true, {}, config, {
 
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-    new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': true }),
+    new webpack.DefinePlugin({...GLOBALS, 'process.env.BROWSER': true}),
 
     // Emit a file with assets paths
     // https://github.com/sporto/assets-webpack-plugin#options
     new AssetsPlugin({
       path: path.resolve(__dirname, '../build'),
       filename: 'assets.js',
-      processOutput: x => `module.exports = ${JSON.stringify(x)}`
+      processOutput: (x) => `module.exports = ${JSON.stringify(x)}`
     }),
 
     // Assign the module and chunk ids by occurrence count
@@ -216,25 +216,25 @@ const serverConfig = extend(true, {}, config, {
 
   externals: [
     /^\.\/assets$/,
-    function filter(context, request, cb) {
+    function filter (context, request, cb) {
       const isExternal =
         request.match(/^[@a-z][a-z\/\.\-0-9]*$/i) &&
         !request.match(/^react-routing/) &&
         !context.match(/[\\/]react-routing/)
       cb(null, Boolean(isExternal))
-    },
-  ]
+    }
+  ],
 
   plugins: [
 
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-    new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': false }),
+    new webpack.DefinePlugin({...GLOBALS, 'process.env.BROWSER': false}),
 
     // Adds a banner to the top of each generated chunk
     // https://webpack.github.io/docs/list-of-plugins.html#bannerplugin
     new webpack.BannerPlugin('require("source-map-support").install()',
-      { raw: true, entryOnly: false })
+      {raw: true, entryOnly: false})
   ],
 
   node: {

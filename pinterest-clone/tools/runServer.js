@@ -6,12 +6,12 @@ import webpackConfig from './webpack.config'
 const RUNNING_REGEXP = /The server is running at http:\/\/(.*?)\//
 
 let server
-const { output } = webpackConfig.find(x => x.target === 'node')
+const {output} = webpackConfig.find((x) => x.target === 'node')
 const serverPath = path.join(output.path, output.filename)
 
 // Launch or restart the Node.js server
-function runServer(cb) {
-  function onStdOut(data) {
+function runServer (cb) {
+  function onStdOut (data) {
     const time = new Date().toTimeString()
     const match = data.toString('utf8').match(RUNNING_REGEXP)
 
@@ -20,7 +20,7 @@ function runServer(cb) {
 
     if (match) {
       server.stdout.removeListener('data', onStdOut)
-      server.stdout.on('data', x => process.stdout.write(x))
+      server.stdout.on('data', (x) => process.stdout.write(x))
       if (cb) {
         cb(null, match[1])
       }
@@ -32,12 +32,12 @@ function runServer(cb) {
   }
 
   server = cp.spawn('node', [serverPath], {
-    env: Object.assign({ NODE_ENV: 'development' }, process.env),
+    env: Object.assign({NODE_ENV: 'development'}, process.env),
     silent: false
   })
 
   server.stdout.on('data', onStdOut)
-  server.stderr.on('data', x => process.stderr.write(x))
+  server.stderr.on('data', (x) => process.stderr.write(x))
 }
 
 process.on('exit', () => {

@@ -7,27 +7,27 @@ import fetch from './lib/fetch'
 const getRemote = (slot) => ({
   name: slot || 'production',
   url: `https://example${slot ? `-${slot}` : ''}.scm.azurewebsites.net:443/example.git`,
-  website: `http://example${slot ? `-${slot}` : ''}.azurewebsites.net`,
+  website: `http://example${slot ? `-${slot}` : ''}.azurewebsites.net`
 })
 
 /**
  * Deploy the contents of the `/build` folder to a remote
  * server via Git. Example: `npm run deploy -- production`
  */
-async function deploy() {
+async function deploy () {
   // By default deploy to the staging deployment slot
   const remote = getRemote(process.argv.includes('--production') ? null : 'staging')
 
   // Initialize a new Git repository inside the `/build` folder
   // if it doesn't exist yet
-  const repo = await GitRepo.open('build', { init: true })
+  const repo = await GitRepo.open('build', {init: true})
   await repo.setRemote(remote.name, remote.url)
 
   // Fetch the remote repository if it exists
   if ((await repo.hasRef(remote.url, 'master'))) {
     await repo.fetch(remote.name)
-    await repo.reset(`${remote.name}/master`, { hard: true })
-    await repo.clean({ force: true })
+    await repo.reset(`${remote.name}/master`, {hard: true})
+    await repo.clean({force: true})
   }
 
   // Build the project in RELEASE mode which

@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react'
+import React, {PropTypes} from 'react'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import s from './ErrorPage.scss'
 
-function ErrorPage({ error }, context) {
+function ErrorPage ({error}, context) {
   let title = 'Error'
   let content = 'Sorry, a critical error occurred on this page.'
   let errorMessage = null
@@ -25,7 +25,7 @@ function ErrorPage({ error }, context) {
   )
 }
 
-ErrorPage.propTypes = { error: PropTypes.object.isRequired }
-ErrorPage.contextTypes = { setTitle: PropTypes.func.isRequired }
+ErrorPage.propTypes = {error: PropTypes.object.isRequired}
+ErrorPage.contextTypes = {setTitle: PropTypes.func.isRequired}
 
 export default withStyles(ErrorPage, s)

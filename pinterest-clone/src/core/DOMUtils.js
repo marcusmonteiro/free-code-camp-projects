@@ -1,4 +1,4 @@
-export function addEventListener(node, event, listener) {
+export function addEventListener (node, event, listener) {
   if (node.addEventListener) {
     node.addEventListener(event, listener, false)
   } else {
@@ -6,7 +6,7 @@ export function addEventListener(node, event, listener) {
   }
 }
 
-export function removeEventListener(node, event, listener) {
+export function removeEventListener (node, event, listener) {
   if (node.removeEventListener) {
     node.removeEventListener(event, listener, false)
   } else {

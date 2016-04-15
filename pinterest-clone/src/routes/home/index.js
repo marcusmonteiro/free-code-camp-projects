@@ -5,7 +5,7 @@ export default {
 
   path: '/',
 
-  async action() {
+  async action () {
     return <Home />
   }
 
