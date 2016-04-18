@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react'
-import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import s from './ImagesGrid.scss'
+import s from './styles'
 import GridList from 'material-ui/lib/grid-list/grid-list'
 import GridTile from 'material-ui/lib/grid-list/grid-tile'
 import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border'
@@ -11,7 +10,7 @@ function ImagesGrid ({imagesData}) {
     <div style={s.root}>
       <GridList
         cellHeight={200}
-        // style={s.gridList}
+        style={s.gridList}
       >
         {imagesData.map((image) => (
           <GridTile

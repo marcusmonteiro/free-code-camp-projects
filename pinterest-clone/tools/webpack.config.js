@@ -2,6 +2,7 @@ import path from 'path'
 import webpack from 'webpack'
 import extend from 'extend'
 import AssetsPlugin from 'assets-webpack-plugin'
+import nodeExternals from 'webpack-node-externals'
 
 const DEBUG = !process.argv.includes('--release')
 const VERBOSE = process.argv.includes('--verbose')
@@ -215,14 +216,7 @@ const serverConfig = extend(true, {}, config, {
   target: 'node',
 
   externals: [
-    /^\.\/assets$/,
-    function filter (context, request, cb) {
-      const isExternal =
-        request.match(/^[@a-z][a-z\/\.\-0-9]*$/i) &&
-        !request.match(/^react-routing/) &&
-        !context.match(/[\\/]react-routing/)
-      cb(null, Boolean(isExternal))
-    }
+    nodeExternals()
   ],
 
   plugins: [

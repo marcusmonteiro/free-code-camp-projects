@@ -1,6 +1,4 @@
 import React, {PropTypes} from 'react'
-import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import s from './Home.scss'
 import ImagesGrid from '../../components/ImagesGrid/ImagesGrid'
 
 const title = 'Pinterest Clone'
@@ -15,5 +13,12 @@ function Home ({imagesData}, context) {
 }
 
 Home.contextTypes = {setTitle: PropTypes.func.isRequired}
+Home.propTypes = {
+  imagesData: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired
+  })).isRequired
+}
 
 export default Home
