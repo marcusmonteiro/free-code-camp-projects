@@ -52,7 +52,7 @@ const config = {
           babelrc: false,
           presets: [
             'react',
-            'es2015',
+            'node5',
             'stage-0'
           ],
           plugins: [
@@ -216,6 +216,7 @@ const serverConfig = extend(true, {}, config, {
   target: 'node',
 
   externals: [
+    /^\.\/assets$/,
     nodeExternals()
   ],
 

@@ -9,12 +9,12 @@ function ImagesGrid ({imagesData}) {
   return (
     <div style={s.root}>
       <GridList
-        cellHeight={200}
         style={s.gridList}
+        cols={4}
       >
-        {imagesData.map((image) => (
+        {imagesData.map((image, index) => (
           <GridTile
-            key={image.link}
+            key={index}
             title={image.title}
             subtitle={<span>by <b>{image.author}</b></span>}
             actionIcon={<IconButton><StarBorder color='white'/></IconButton>}
