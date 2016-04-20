@@ -5,6 +5,7 @@ import {match} from 'universal-router'
 import routes from './routes'
 import history from './core/history'
 import {addEventListener, removeEventListener} from './core/DOMUtils'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
 const context = {
   insertCss: (styles) => styles._insertCss(),
@@ -68,6 +69,9 @@ function render (container, state, component) {
 function run () {
   let currentLocation = null
   const container = document.getElementById('app')
+
+  // For material-ui
+  injectTapEventPlugin()
 
   // Make taps on links and buttons work fast on mobiles
   FastClick.attach(document.body)
