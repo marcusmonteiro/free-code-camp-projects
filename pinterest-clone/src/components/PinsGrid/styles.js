@@ -2,7 +2,10 @@ export default {
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    margin: '0 auto',
+    maxWidth: '50%',
+    maxHeight: '50%'
   },
 
   gridList: {

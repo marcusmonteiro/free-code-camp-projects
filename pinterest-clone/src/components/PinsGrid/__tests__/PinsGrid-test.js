@@ -24,15 +24,15 @@ let pinsData = [
   }
 ]
 
-const wrapper = shallow(<PinsGrid pinsData={pinsData} />)
-
 test('PinsGrid', (assert) => {
   test('renders as many pins as there are elements in the pinsData array', (assert) => {
+    const wrapper = shallow(<PinsGrid pinsData={pinsData} />)
     assert.equal(wrapper.find('GridTile').length, pinsData.length)
     assert.end()
   })
 
   test('if profile_pic_link is not null, it renders it as an Image', (assert) => {
+    const wrapper = shallow(<PinsGrid pinsData={pinsData} />)
     let count = 0
     wrapper.find('GridTile').map((node, index) => {
       const gridTileSubtitlePropsImagePosition = node.props().subtitle.props.children[1]
@@ -50,6 +50,19 @@ test('PinsGrid', (assert) => {
       }
     })
     assert.equal(count, 2)
+    assert.end()
+  })
+
+  test('max width and height of the grid tiles can be passed as arguments', (assert) => {
+    let testOk = false
+    while (!testOk) {
+      const wrapper = shallow(<PinsGrid pinsData={pinsData} maxTileWidth={10} maxTileHeight={10} />)
+      wrapper.find('GridTile').map((node, index) => {
+        if (node.props().cols > 1 && node.props().rows > 1) {
+          testOk = true
+        }
+      })
+    }
     assert.end()
   })
 

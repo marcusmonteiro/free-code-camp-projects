@@ -5,13 +5,15 @@ import GridTile from 'material-ui/lib/grid-list/grid-tile'
 import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border'
 import IconButton from 'material-ui/lib/icon-button'
 import {Image} from 'react-bootstrap'
+import {randomInt} from '../../utils/utils'
 
-function PinsGrid ({pinsData}) {
+function PinsGrid ({pinsData, maxTileWidth = 1, maxTileHeight = 1}) {
   return (
     <div style={s.root}>
       <GridList
         style={s.gridList}
         cols={4}
+        padding={8}
       >
         {pinsData.map((pin) => (
           <GridTile
@@ -23,6 +25,8 @@ function PinsGrid ({pinsData}) {
             }<b>{pin.author}</b></span>
             }
             actionIcon={<IconButton><StarBorder color='white'/></IconButton>}
+            cols={randomInt(1, maxTileWidth)}
+            rows={randomInt(1, maxTileHeight)}
           >
             <img src={pin.image_link} />
           </GridTile>
@@ -38,7 +42,9 @@ PinsGrid.propTypes = {
     image_link: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     profile_pic_link: PropTypes.string
-  })).isRequired
+  })).isRequired,
+  maxTileWidth: PropTypes.number,
+  maxTileHeight: PropTypes.number
 }
 
 export default PinsGrid
