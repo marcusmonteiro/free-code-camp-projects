@@ -36,7 +36,8 @@ PinsGrid.propTypes = {
   pinsData: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     image_link: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired
+    author: PropTypes.string.isRequired,
+    profile_pic_link: PropTypes.string
   })).isRequired
 }
 
