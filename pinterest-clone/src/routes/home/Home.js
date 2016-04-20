@@ -1,23 +1,24 @@
 import React, {PropTypes} from 'react'
-import ImagesGrid from '../../components/ImagesGrid/ImagesGrid'
+import PinsGrid from '../../components/PinsGrid/PinsGrid'
 
 const title = 'Pinterest Clone'
 
-function Home ({imagesData}, context) {
+function Home ({pinsData}, context) {
   context.setTitle(title)
   return (
     <div>
-      <ImagesGrid imagesData={imagesData} />
+      <PinsGrid pinsData={pinsData} />
     </div>
   )
 }
 
 Home.contextTypes = {setTitle: PropTypes.func.isRequired}
 Home.propTypes = {
-  imagesData: PropTypes.arrayOf(PropTypes.shape({
+  pinsData: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired
+    image_link: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    profile_pic_link: PropTypes.string
   })).isRequired
 }
 

@@ -4,22 +4,27 @@ import GridList from 'material-ui/lib/grid-list/grid-list'
 import GridTile from 'material-ui/lib/grid-list/grid-tile'
 import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border'
 import IconButton from 'material-ui/lib/icon-button'
+import {Image} from 'react-bootstrap'
 
-function ImagesGrid ({imagesData}) {
+function PinsGrid ({pinsData}) {
   return (
     <div style={s.root}>
       <GridList
         style={s.gridList}
         cols={4}
       >
-        {imagesData.map((image, index) => (
+        {pinsData.map((pin) => (
           <GridTile
-            key={index}
-            title={image.title}
-            subtitle={<span>by <b>{image.author}</b></span>}
+            key={pin.image_link}
+            title={pin.title}
+            subtitle={<span>by {
+              pin.profile_pic_link
+              ? <Image style={s.profilePic}src={pin.profile_pic_link} circle responsive /> : null
+            }<b>{pin.author}</b></span>
+            }
             actionIcon={<IconButton><StarBorder color='white'/></IconButton>}
           >
-            <img src={image.link} />
+            <img src={pin.image_link} />
           </GridTile>
         ))}
       </GridList>
@@ -27,12 +32,12 @@ function ImagesGrid ({imagesData}) {
   )
 }
 
-ImagesGrid.propTypes = {
-  imagesData: PropTypes.arrayOf(PropTypes.shape({
+PinsGrid.propTypes = {
+  pinsData: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
+    image_link: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired
   })).isRequired
 }
 
-export default ImagesGrid
+export default PinsGrid
