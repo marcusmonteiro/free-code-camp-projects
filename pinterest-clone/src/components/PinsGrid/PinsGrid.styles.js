@@ -4,20 +4,18 @@ export default {
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     margin: '0 auto',
-    maxWidth: '50%',
-    maxHeight: '50%'
+    maxWidth: '60%',
+    maxHeight: '60%'
   },
 
   gridList: {
-    // width: 500,
-    // height: 400,
     overflowY: 'auto',
     marginBottom: 24
   },
 
   profilePic: {
-    width: '20%',
-    height: '20%',
+    width: '30%',
+    height: '30%',
     display: 'inline-block',
     paddingLeft: '0.5em',
     paddingRight: '0.5em',

@@ -3,22 +3,24 @@ import PinsGrid from '../../components/PinsGrid/PinsGrid'
 
 const title = 'Pinterest Clone'
 
-function Home ({pinsData}, context) {
+function Home ({usersData}, context) {
   context.setTitle(title)
   return (
     <div>
-      <PinsGrid pinsData={pinsData} />
+      <PinsGrid usersData={usersData} />
     </div>
   )
 }
 
 Home.contextTypes = {setTitle: PropTypes.func.isRequired}
 Home.propTypes = {
-  pinsData: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    image_link: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    profile_pic_link: PropTypes.string
+  usersData: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    profile_pic_link: PropTypes.string,
+    pins: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      image_link: PropTypes.string.isRequired
+    })).isRequired
   })).isRequired
 }
 

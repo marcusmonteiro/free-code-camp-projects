@@ -7,6 +7,6 @@ export default {
   path: '/',
 
   async action () {
-    return <Home pinsData={data.pins} />
+    return <Home usersData={data.users} />
   }
 }
