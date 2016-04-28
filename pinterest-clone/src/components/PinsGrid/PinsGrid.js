@@ -8,6 +8,26 @@ import {Image} from 'react-bootstrap'
 import {randomInt} from '../../utils/utils'
 
 function usersGrid ({usersData, maxTileWidth = 1, maxTileHeight = 1}) {
+  const gridTiles = usersData.map((user) => {
+    return user.pins.map((pin) => {
+      return (
+        <GridTile
+          key={pin.image_link}
+          title={pin.title}
+          subtitle={<span>by {
+              user.profile_pic_link
+              ? <Image style={s.profilePic}src={user.profile_pic_link} circle responsive /> : null
+            }<b>{user.name}</b></span>
+          }
+          actionIcon={<IconButton><StarBorder color='white'/></IconButton>}
+          cols={randomInt(1, maxTileWidth)}
+          rows={randomInt(1, maxTileHeight)}
+        >
+          <img src={pin.image_link} />
+        </GridTile>
+      )
+    })
+  })
   return (
     <div style={s.root}>
       <GridList
@@ -15,24 +35,7 @@ function usersGrid ({usersData, maxTileWidth = 1, maxTileHeight = 1}) {
         cols={4}
         padding={8}
       >
-        {usersData.map((user) => {
-          user.pins.map((pin) => {
-            {<GridTile
-              key={pin.image_link}
-              title={pin.title}
-              subtitle={<span>by {
-                  user.profile_pic_link
-                  ? <Image style={s.profilePic}src={user.profile_pic_link} circle responsive /> : null
-                }<b>{user.name}</b></span>
-              }
-              actionIcon={<IconButton><StarBorder color='white'/></IconButton>}
-              cols={randomInt(1, maxTileWidth)}
-              rows={randomInt(1, maxTileHeight)}
-            >
-              <img src={pin.image_link} />
-            </GridTile>}
-          })
-        })}
+        {gridTiles}
       </GridList>
     </div>
   )
