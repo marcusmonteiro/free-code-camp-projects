@@ -1,0 +1,7 @@
+{
+  "presets": [
+    "node5",
+    "stage-0",
+    "react"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "nightlife-coordination-app",
+  "version": "1.0.0",
+  "description": "Nightlife coordination app project from FreeCodeCamp",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && npm run test:unit:f",
+    "lint": "standard src/**/*.js | snazzy",
+    "test:unit": "babel-tape-runner \"src/**/*-test.js\"",
+    "test:unit:f": "npm run test:unit | faucet",
+    "build": "babel-node ./tools/build.js",
+    "start": "npm run build && node ./build/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcusmonteiro/free-code-camp-projects.git"
+  },
+  "keywords": [
+    "FreeCodeCamp",
+    "backend",
+    "frontend",
+    "fullstack"
+  ],
+  "author": "Marcus Vinicius Monteiro de Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcusmonteiro/free-code-camp-projects/issues"
+  },
+  "homepage": "https://github.com/marcusmonteiro/free-code-camp-projects#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.7.4",
+    "lodash": "^4.11.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.7",
+    "babel-core": "^6.7.7",
+    "babel-eslint": "^6.0.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-node5": "^11.0.2",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.7.2",
+    "babel-tape-runner": "^2.0.1",
+    "eslint": "^2.10.1",
+    "faucet": "0.0.1",
+    "json-loader": "^0.5.4",
+    "mkdirp": "^0.5.1",
+    "rmdir": "^1.2.0",
+    "snazzy": "^3.0.1",
+    "standard": "^7.0.1",
+    "tape": "^4.5.1",
+    "webpack": "^1.13.0"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  }
+}
