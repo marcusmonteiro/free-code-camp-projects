@@ -1,21 +1,22 @@
 /*
  *
- * NewQuoteButton
+ * QuoteHero
  *
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 
 import FlatButton from 'material-ui/FlatButton';
 import FormatQuote from 'material-ui/svg-icons/editor/format-quote';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import { connect } from 'react-redux';
-import selectNewQuoteButton from './selectors';
+import { loadQuote } from './actions';
+import {
+  selectQuoteHero,
+} from './selectors';
 
-import { getQuote } from './actions';
-
-export class NewQuoteButton extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class QuoteHero extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.onClickButton();
   }
@@ -25,7 +26,7 @@ export class NewQuoteButton extends React.Component { // eslint-disable-line rea
       <div>
         <MuiThemeProvider>
           <FlatButton
-            label='New Quote'
+            label="New Quote"
             icon={<FormatQuote />}
             // BUG: onTouchStart is not working
             onClick={this.props.onClickButton}
@@ -36,20 +37,18 @@ export class NewQuoteButton extends React.Component { // eslint-disable-line rea
   }
 }
 
-NewQuoteButton.propTypes = {
+QuoteHero.propTypes = {
   loading: React.PropTypes.bool,
   error: React.PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.bool
+    React.PropTypes.string,
+    React.PropTypes.bool,
   ]),
-  quoteData: React.PropTypes.oneOfType([
-    React.PropTypes.array,
-    React.PropTypes.bool
-  ]),
-  onClickButton: React.PropTypes.func
-}
+  quote: React.PropTypes.string,
+  author: React.PropTypes.string,
+  onClickButton: React.PropTypes.func,
+};
 
-const mapStateToProps = selectNewQuoteButton();
+const mapStateToProps = selectQuoteHero();
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -57,10 +56,10 @@ function mapDispatchToProps(dispatch) {
       if (evt !== undefined && evt.preventDefault) {
         evt.preventDefault();
       }
-      dispatch(getQuote());
+      dispatch(loadQuote());
     },
-    dispatch
+    dispatch,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewQuoteButton);
+export default connect(mapStateToProps, mapDispatchToProps)(QuoteHero);
