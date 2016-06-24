@@ -10,12 +10,15 @@
  */
 
 import React from 'react';
+import NewQuoteButton from 'containers/NewQuoteButton';
 
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     return (
-      <h1>This is the Homepage!</h1>
+      <div>
+        <NewQuoteButton />
+      </div>
     );
   }
 }

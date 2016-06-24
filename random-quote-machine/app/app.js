@@ -14,6 +14,14 @@ import 'file?name=[name].[ext]!./.htaccess';      // eslint-disable-line import/
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// For material-ui
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+
 import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
